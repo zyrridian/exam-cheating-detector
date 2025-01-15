@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exam Cheating Detection</title>
+    <script>
+        // Check if the tab is active or inactive
+        document.addEventListener("visibilitychange", () => {
+            if (document.hidden) {
+                alert("Tab switch detected! Please stay on the exam tab.");
+            } else {
+                console.log("Welcome back to the exam tab.");
+            }
+        });
+
+        // Disable right-click to prevent context menu usage
+        document.addEventListener("contextmenu", (event) => {
+            event.preventDefault();
+            alert("Right-click is disabled during the exam.");
+        });
+
+        // Block certain keyboard shortcuts (like Ctrl+C, Ctrl+Shift+I, etc.)
+        document.addEventListener("keydown", (event) => {
+            if (
+                (event.ctrlKey && (event.key === "c" || event.key === "u")) || // Ctrl+C or Ctrl+U
+                (event.ctrlKey && event.shiftKey && (event.key === "I" || event.key === "J")) || // Ctrl+Shift+I or Ctrl+Shift+J
+                (event.key === "F12") // F12
+            ) {
+                event.preventDefault();
+                alert("Cheating attempt detected! Keyboard shortcut is disabled.");
+            }
+        });
+
+        // Attempt to detect multiple monitor usage (limited functionality)
+        if (window.screen.availWidth !== window.screen.width || window.screen.availHeight !== window.screen.height) {
+            alert("Multiple monitor setup detected! Please use only one screen for the exam.");
+        }
+
+        // Warn on any console access
+        console.log = console.warn = console.error = () => {
+            alert("Console access is restricted during the exam!");
+        };
+
+        console.log("Exam security is active. Please focus on your exam.");
+    </script>
+</head>
+<body>
+    <h1>Exam in Progress</h1>
+    <p>Please focus on this page and avoid switching tabs or using prohibited actions.</p>
+</body>
+</html>
