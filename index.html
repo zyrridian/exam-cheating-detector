@@ -5,13 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Exam Cheating Detection</title>
     <script>
-        // Check if the tab is active or inactive
-        document.addEventListener("visibilitychange", () => {
-            if (document.hidden) {
-                alert("Tab switch detected! Please stay on the exam tab.");
-            } else {
-                console.log("Welcome back to the exam tab.");
-            }
+        // Detect when the tab becomes inactive or loses focus
+        window.addEventListener("blur", () => {
+            alert("Window focus lost! Please stay focused on the exam.");
+        });
+
+        // Detect when the tab regains focus
+        window.addEventListener("focus", () => {
+            console.log("Window focus regained. Thank you for staying attentive.");
         });
 
         // Disable right-click to prevent context menu usage
@@ -36,11 +37,6 @@
         if (window.screen.availWidth !== window.screen.width || window.screen.availHeight !== window.screen.height) {
             alert("Multiple monitor setup detected! Please use only one screen for the exam.");
         }
-
-        // Warn on any console access
-        console.log = console.warn = console.error = () => {
-            alert("Console access is restricted during the exam!");
-        };
 
         console.log("Exam security is active. Please focus on your exam.");
     </script>
